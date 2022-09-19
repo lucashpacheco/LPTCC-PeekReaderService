@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PeekWriterService.Models\PeekReaderService.Models.csproj" />
+    <ProjectReference Include="..\PeekReaderService.Models\PeekReaderService.Models.csproj" />
   </ItemGroup>
 
 </Project>
