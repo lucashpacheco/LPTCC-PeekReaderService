@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PeekReaderService.Models\PeekReaderService.Models.csproj" />
+    <ProjectReference Include="..\PeekReaderService.Repository\PeekReaderService.Repository.csproj" />
+    <ProjectReference Include="..\PeekReaderService.Service\PeekReaderService.Service.csproj" />
   </ItemGroup>
 
 </Project>

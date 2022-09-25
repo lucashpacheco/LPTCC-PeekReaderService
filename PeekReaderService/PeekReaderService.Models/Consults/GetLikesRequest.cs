@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using PeekReaderService.Models.Responses.Common;
+using PeekReaderService.Models.Common.Responses;
 
 namespace PeekReaderService.Models.Consults
 {
-    internal class GetLikesRequest
+    public class GetLikesRequest
     {
         [Required(ErrorMessage = "PeekId is required")]
         public Guid PeekId { get; set; }

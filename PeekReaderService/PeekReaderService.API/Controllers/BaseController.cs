@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using PeekReaderService.Models.Responses.Common;
+using PeekReaderService.Models.Common.Responses;
 
 namespace PeekReaderService.API.Controllers
 {

@@ -4,7 +4,7 @@ using PeekReaderService.Models.Common.Responses;
 
 namespace PeekReaderService.Models.Consults
 {
-    public class GetPeeksRequest
+    public class GetCommentsRequest
     {
         [Required(ErrorMessage = "PeekId is required")]
         public Guid PeekId { get; set; }

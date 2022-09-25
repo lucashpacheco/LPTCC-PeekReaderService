@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PeekReaderService.Models.Responses.Common
+namespace PeekReaderService.Models.Common.Responses
 {
     public class PagedResult<T>
     {

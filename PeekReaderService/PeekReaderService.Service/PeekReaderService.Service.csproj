@@ -4,4 +4,14 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PeekReaderService.Models\PeekReaderService.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PeekWriterService.Models">
+      <HintPath>..\..\..\LPTCC-PeekWriterService\PeekWriterService\PeekWriterService.Models\bin\Debug\net5.0\PeekWriterService.Models.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
