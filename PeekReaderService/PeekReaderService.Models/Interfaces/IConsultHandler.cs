@@ -1,14 +1,15 @@
 ﻿using System.Threading.Tasks;
 using PeekReaderService.Models.Common.Responses;
 using PeekReaderService.Models.Consults;
+using PeekWriterService.Models.Domain;
 
 namespace PeekReaderService.Models.Interfaces
 {
     public interface IConsultHandler
     {
-        Task<ResponseBase<bool>> Get(GetLikesRequest getLikesRequest);
-        Task<ResponseBase<bool>> Get(GetPeeksRequest getPeeksRequest);
-        Task<ResponseBase<bool>> Get(GetCommentsRequest getCommentsRequest);
+        Task<ResponseBase<PeekDocument>> Get(GetPeeksRequest getPeeksRequest);
+        Task<ResponseBase<LikesDocument>> Get(GetLikesRequest getPeeksRequest);
+        Task<ResponseBase<CommentsDocument>> Get(GetCommentsRequest getCommentsRequest);
 
     }
 }

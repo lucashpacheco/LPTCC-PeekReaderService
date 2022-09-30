@@ -20,7 +20,7 @@ namespace PeekReaderService.Repository.Repositories
 
         public async Task<PeekDocument> Get(GetPeeksRequest getPeeksRequest)
         {
-            var result = await _peekContext.Peek.FindAsync(x => x.Id == getPeeksRequest.PeekId);
+            var result = await _peekContext.Peek.FindAsync(x => x.AuthorId == getPeeksRequest.UserId);
 
             return result.FirstOrDefault();
         }

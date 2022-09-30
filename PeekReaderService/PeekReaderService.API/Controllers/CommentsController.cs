@@ -10,19 +10,19 @@ namespace PeekReaderService.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PeekController : ControllerBase
+    public class CommentsController : ControllerBase
     {
         private readonly ILogger<PeekController> _logger;
         private readonly IConsultHandler _consultHandler;
 
-        public PeekController(ILogger<PeekController> logger, IConsultHandler consultHandler)
+        public CommentsController(ILogger<PeekController> logger, IConsultHandler consultHandler)
         {
             _logger = logger;
             _consultHandler = consultHandler;
         }
 
         [HttpGet]
-        public async Task<ResponseBase<PeekDocument>> Get(GetPeeksRequest getPeeksRequest)
+        public async Task<ResponseBase<CommentsDocument>> Get(GetCommentsRequest getPeeksRequest)
         {
             var result = await _consultHandler.Get(getPeeksRequest);
 

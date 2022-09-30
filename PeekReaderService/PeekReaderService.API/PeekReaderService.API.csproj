@@ -17,4 +17,10 @@
     <ProjectReference Include="..\PeekReaderService.Service\PeekReaderService.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="PeekWriterService.Models">
+      <HintPath>..\..\..\LPTCC-PeekWriterService\PeekWriterService\PeekWriterService.Models\bin\Debug\net5.0\PeekWriterService.Models.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
