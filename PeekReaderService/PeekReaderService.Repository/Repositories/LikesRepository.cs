@@ -1,12 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using PeekReaderService.Models.Consults;
+using Peek.Framework.PeekServices.Documents;
+using Peek.Framework.PeekServices.PeekReader.Consults;
+using PeekReaderService.Models;
 using PeekReaderService.Repository.Contexts;
 using PeekReaderService.Service.Interfaces;
-using PeekWriterService.API.Config;
-using PeekWriterService.Models.Domain;
 
 namespace PeekReaderService.Repository.Repositories
 {

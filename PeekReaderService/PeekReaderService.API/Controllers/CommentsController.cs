@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PeekReaderService.Models.Common.Responses;
-using PeekReaderService.Models.Consults;
+using Peek.Framework.Common.Responses;
+using Peek.Framework.PeekServices.Documents;
+using Peek.Framework.PeekServices.PeekReader.Consults;
 using PeekReaderService.Models.Interfaces;
-using PeekWriterService.Models.Domain;
 
 namespace PeekReaderService.API.Controllers
 {
@@ -27,7 +27,7 @@ namespace PeekReaderService.API.Controllers
             var result = await _consultHandler.Get(getPeeksRequest);
 
             return result;
-           
+
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using PeekReaderService.Models.Common.Responses;
-using PeekReaderService.Models.Consults;
+using Peek.Framework.Common.Responses;
+using Peek.Framework.PeekServices.Documents;
+using Peek.Framework.PeekServices.PeekReader.Consults;
 using PeekReaderService.Models.Interfaces;
 using PeekReaderService.Service.Interfaces;
-using PeekWriterService.Models.Domain;
 
 namespace PeekReaderService.Service
 {
@@ -39,7 +39,7 @@ namespace PeekReaderService.Service
         public async Task<ResponseBase<LikesDocument>> Get(GetLikesRequest getLikesRequest)
         {
             var response = new ResponseBase<LikesDocument>(success: false, errors: new List<string>(), data: null);
-            
+
             var result = await _likesRepository.Get(getLikesRequest);
 
             if (result == null)

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using PeekWriterService.API.Config;
-using PeekWriterService.Models.Domain;
+using Peek.Framework.PeekServices.Documents;
+using PeekReaderService.Models;
 
 namespace PeekReaderService.Repository.Contexts
 {

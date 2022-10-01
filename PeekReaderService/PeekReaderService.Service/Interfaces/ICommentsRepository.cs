@@ -1,7 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using PeekReaderService.Models.Consults;
-using PeekWriterService.Models.Domain;
+﻿using System.Threading.Tasks;
+using Peek.Framework.PeekServices.Documents;
+using Peek.Framework.PeekServices.PeekReader.Consults;
 
 namespace PeekReaderService.Service.Interfaces
 {
