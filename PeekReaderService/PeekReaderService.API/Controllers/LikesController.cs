@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Peek.Framework.Common.Responses;
-using Peek.Framework.PeekServices.Documents;
+using Peek.Framework.Common.Utils;
 using Peek.Framework.PeekServices.PeekReader.Consults;
 using PeekReaderService.Models.Interfaces;
 
@@ -10,7 +9,7 @@ namespace PeekReaderService.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class LikesController : ControllerBase
+    public class LikesController : BaseController
     {
         private readonly ILogger<PeekController> _logger;
         private readonly IConsultHandler _consultHandler;
@@ -22,11 +21,11 @@ namespace PeekReaderService.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ResponseBase<LikesDocument>> Get(GetLikesRequest getPeeksRequest)
+        public async Task<ActionResult> Get([FromQuery] GetLikesRequest getPeeksRequest)
         {
             var result = await _consultHandler.Get(getPeeksRequest);
 
-            return result;
+            return CustomResponse(result);
 
         }
     }
