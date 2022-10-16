@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PeekReaderService.API.Config;
+using PeekReaderService.Models;
 
 namespace PeekReaderService.API
 {
@@ -21,7 +22,11 @@ namespace PeekReaderService.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDependencyInjectionConfiguration(Configuration);
-
+            services.Configure<ConfigDb>(opcoes =>
+            {
+                opcoes.ConnectionString = Configuration.GetSection("MongoConnection:ConnectionString").Value;
+                opcoes.Database = Configuration.GetSection("MongoConnection:Database").Value;
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

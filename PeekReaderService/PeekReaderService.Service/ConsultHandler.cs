@@ -5,6 +5,8 @@ using Peek.Framework.PeekServices.Documents;
 using Peek.Framework.PeekServices.PeekReader.Consults;
 using PeekReaderService.Models.Interfaces;
 using PeekReaderService.Service.Interfaces;
+using Domain = Peek.Framework.PeekServices.Domain;
+
 
 namespace PeekReaderService.Service
 {
@@ -21,9 +23,9 @@ namespace PeekReaderService.Service
             _likesRepository = likesRepository;
         }
 
-        public async Task<ResponseBase<PeekDocument>> Get(GetPeeksRequest getPeeksRequest)
+        public async Task<ResponseBase<PagedResult<Domain.Peek>>> Get(GetPeeksRequest getPeeksRequest)
         {
-            var response = new ResponseBase<PeekDocument>(success: false, errors: new List<string>(), data: null);
+            var response = new ResponseBase<PagedResult<Domain.Peek>>(success: false, errors: new List<string>(), data: new PagedResult<Domain.Peek>());
 
             var result = await _peekRepository.Get(getPeeksRequest);
 
@@ -31,7 +33,8 @@ namespace PeekReaderService.Service
                 return response;
 
             response.Success = true;
-            response.Data = result;
+            response.Data.Result = result;
+            response.Data.TotalItems = 0;
 
             return response;
         }

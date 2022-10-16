@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using Peek.Framework.PeekServices.Documents;
 using PeekReaderService.Models;
+using Domain = Peek.Framework.PeekServices.Domain;
 
 namespace PeekReaderService.Repository.Contexts
 {
@@ -18,11 +18,11 @@ namespace PeekReaderService.Repository.Contexts
             }
         }
 
-        public IMongoCollection<PeekDocument> Peek
+        public IMongoCollection<Domain.Peek> Peek
         {
             get
             {
-                return _mongoDatabase.GetCollection<PeekDocument>("PeekDocument");
+                return _mongoDatabase.GetCollection<Domain.Peek>("PeekDocument");
             }
         }
     }

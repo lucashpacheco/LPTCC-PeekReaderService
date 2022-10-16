@@ -20,8 +20,8 @@ namespace PeekReaderService.API.Controllers
             _consultHandler = consultHandler;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Get([FromQuery] GetPeeksRequest getPeeksRequest)
+        [HttpPost]
+        public async Task<ActionResult> Get([FromBody] GetPeeksRequest getPeeksRequest)
         {
             var result = await _consultHandler.Get(getPeeksRequest);
 

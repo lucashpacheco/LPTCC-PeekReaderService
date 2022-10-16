@@ -9,8 +9,7 @@ namespace PeekReaderService.API.Config
 {
     public static class DependencyInjectionConfiguration
     {
-        public static IServiceCollection AddDependencyInjectionConfiguration(this IServiceCollection services,
-                                                                                  IConfiguration configuration)
+        public static IServiceCollection AddDependencyInjectionConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
 
             services.AddScoped<IConsultHandler, ConsultHandler>();
