@@ -22,7 +22,7 @@ namespace PeekReaderService.Repository.Contexts
         {
             get
             {
-                return _mongoDatabase.GetCollection<LikesDocument>("PeekDocument");
+                return _mongoDatabase.GetCollection<LikesDocument>("LikesDocument");
             }
         }
     }

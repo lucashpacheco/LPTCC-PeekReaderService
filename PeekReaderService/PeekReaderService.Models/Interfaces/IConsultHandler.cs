@@ -12,6 +12,7 @@ namespace PeekReaderService.Models.Interfaces
         Task<ResponseBase<PagedResult<Domain.Peek>>> Get(GetPeeksRequest getPeeksRequest);
         Task<ResponseBase<LikesDocument>> Get(GetLikesRequest getPeeksRequest);
         Task<ResponseBase<CommentsDocument>> Get(GetCommentsRequest getCommentsRequest);
-
+        Task<ResponseBase<int>> Get(GetLikesCountRequest getLikesCountRequest);
+        Task<ResponseBase<int>> Get(GetCommentsCountRequest getCommentsRequest);
     }
 }

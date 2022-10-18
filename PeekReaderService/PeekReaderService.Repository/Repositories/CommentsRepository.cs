@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Peek.Framework.PeekServices.Documents;
@@ -22,6 +23,13 @@ namespace PeekReaderService.Repository.Repositories
             var result = await _commentsContext.Comments.FindAsync(x => x.PeekId == getCommentsRequest.PeekId);
 
             return result.FirstOrDefault();
+        }
+
+        public async Task<int> Get(GetCommentsCountRequest getCommentsCountRequest)
+        {
+            var result = await _commentsContext.Comments.FindAsync(x => x.PeekId == getCommentsCountRequest.PeekId);
+
+            return result.FirstOrDefault().Comments.ToList().Count();
         }
     }
 }

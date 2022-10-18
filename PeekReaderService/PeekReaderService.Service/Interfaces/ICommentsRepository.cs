@@ -7,5 +7,6 @@ namespace PeekReaderService.Service.Interfaces
     public interface ICommentsRepository
     {
         Task<CommentsDocument> Get(GetCommentsRequest commentsDocument);
+        Task<int> Get(GetCommentsCountRequest getCommentsCountRequest);
     }
 }

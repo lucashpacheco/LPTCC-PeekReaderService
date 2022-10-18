@@ -7,6 +7,7 @@ namespace PeekReaderService.Service.Interfaces
     public interface ILikesRepository
     {
         Task<LikesDocument> Get(GetLikesRequest getLikesRequest);
+        Task<int> Get(GetLikesCountRequest getLikesCountRequest);
 
     }
 }

@@ -28,5 +28,14 @@ namespace PeekReaderService.API.Controllers
             return CustomResponse(result);
 
         }
+
+        [HttpGet("count")]
+        public async Task<ActionResult> Get([FromQuery] GetLikesCountRequest getPeeksRequest)
+        {
+            var result = await _consultHandler.Get(getPeeksRequest);
+
+            return CustomResponse(result);
+
+        }
     }
 }

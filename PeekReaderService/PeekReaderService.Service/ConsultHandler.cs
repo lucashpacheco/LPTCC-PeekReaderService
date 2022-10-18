@@ -68,5 +68,35 @@ namespace PeekReaderService.Service
 
             return response;
         }
+
+        public async Task<ResponseBase<int>> Get(GetLikesCountRequest getLikesCountRequest)
+        {
+            var response = new ResponseBase<int>(success: false, errors: new List<string>(), data: 0);
+
+            var result = await _likesRepository.Get(getLikesCountRequest);
+
+            if (result == null)
+                return response;
+
+            response.Success = true;
+            response.Data = result;
+
+            return response;
+        }
+
+        public async Task<ResponseBase<int>> Get(GetCommentsCountRequest getCommentsRequest)
+        {
+            var response = new ResponseBase<int>(success: false, errors: new List<string>(), data: 0);
+
+            var result = await _commentsRepository.Get(getCommentsRequest);
+
+            if (result == null)
+                return response;
+
+            response.Success = true;
+            response.Data = result;
+
+            return response;
+        }
     }
 }
