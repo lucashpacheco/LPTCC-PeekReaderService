@@ -39,9 +39,9 @@ namespace PeekReaderService.Service
             return response;
         }
 
-        public async Task<ResponseBase<LikesDocument>> Get(GetLikesRequest getLikesRequest)
+        public async Task<ResponseBase<PagedResult<Domain.Like>>> Get(GetLikesRequest getLikesRequest)
         {
-            var response = new ResponseBase<LikesDocument>(success: false, errors: new List<string>(), data: null);
+            var response = new ResponseBase<PagedResult<Domain.Like>>(success: false, errors: new List<string>(), data: null);
 
             var result = await _likesRepository.Get(getLikesRequest);
 
@@ -49,7 +49,9 @@ namespace PeekReaderService.Service
                 return response;
 
             response.Success = true;
-            response.Data = result;
+            response.Data = new PagedResult<Domain.Like>();
+            response.Data.Result = result;
+            response.Data.TotalItems = 0;
 
             return response;
         }

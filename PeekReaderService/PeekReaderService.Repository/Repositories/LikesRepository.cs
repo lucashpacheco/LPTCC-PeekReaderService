@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -7,6 +8,8 @@ using Peek.Framework.PeekServices.PeekReader.Consults;
 using PeekReaderService.Models;
 using PeekReaderService.Repository.Contexts;
 using PeekReaderService.Service.Interfaces;
+using Domain = Peek.Framework.PeekServices.Domain;
+
 
 namespace PeekReaderService.Repository.Repositories
 {
@@ -18,20 +21,34 @@ namespace PeekReaderService.Repository.Repositories
             _likesContext = new LikeContext(options);
         }
 
-        public async Task<LikesDocument> Get(GetLikesRequest getLikesRequest)
+        public async Task<List<Domain.Like>> Get(GetLikesRequest getLikesRequest)
         {
             var result = await _likesContext.Likes.Find(x => x.PeekId == getLikesRequest.PeekId)
                 .Limit(getLikesRequest.PageInformation.PageSize)
                 .ToListAsync();
 
-            return result.FirstOrDefault();
+            if (result.Any())
+            {
+                return result.FirstOrDefault().Likes;
+
+            }
+
+            return null;
         }
 
         public async Task<int> Get(GetLikesCountRequest getLikesCountRequest)
         {
-            var result = await _likesContext.Likes.FindAsync(x => x.PeekId == getLikesCountRequest.PeekId);
+            var result = await _likesContext.Likes.Find(x => x.PeekId == getLikesCountRequest.PeekId)
+                //.Limit(getLikesRequest.PageInformation.PageSize)
+                .ToListAsync();
 
-            return result.FirstOrDefault().Likes.ToList().Count();
+            if (result.Any())
+            {
+                return result.FirstOrDefault().Likes.ToList().Count();
+
+            }
+
+            return 0;
         }
 
 

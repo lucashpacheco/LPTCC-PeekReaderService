@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Peek.Framework.Common.Responses;
 using Peek.Framework.PeekServices.Documents;
 using Peek.Framework.PeekServices.PeekReader.Consults;
@@ -10,7 +11,7 @@ namespace PeekReaderService.Models.Interfaces
     public interface IConsultHandler
     {
         Task<ResponseBase<PagedResult<Domain.Peek>>> Get(GetPeeksRequest getPeeksRequest);
-        Task<ResponseBase<LikesDocument>> Get(GetLikesRequest getPeeksRequest);
+        Task<ResponseBase<PagedResult<Domain.Like>>> Get(GetLikesRequest getPeeksRequest);
         Task<ResponseBase<CommentsDocument>> Get(GetCommentsRequest getCommentsRequest);
         Task<ResponseBase<int>> Get(GetLikesCountRequest getLikesCountRequest);
         Task<ResponseBase<int>> Get(GetCommentsCountRequest getCommentsRequest);

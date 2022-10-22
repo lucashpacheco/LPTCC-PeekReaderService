@@ -27,9 +27,13 @@ namespace PeekReaderService.Repository.Repositories
 
         public async Task<int> Get(GetCommentsCountRequest getCommentsCountRequest)
         {
-            var result = await _commentsContext.Comments.FindAsync(x => x.PeekId == getCommentsCountRequest.PeekId);
+            var result = await _commentsContext.Comments.Find(x => x.PeekId == getCommentsCountRequest.PeekId).ToListAsync();
 
-            return result.FirstOrDefault().Comments.ToList().Count();
+            if (result.Any())
+            {
+                return result.FirstOrDefault().Comments.ToList().Count();
+            }
+            return 0;
         }
     }
 }
