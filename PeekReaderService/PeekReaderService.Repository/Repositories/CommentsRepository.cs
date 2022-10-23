@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -7,6 +8,7 @@ using Peek.Framework.PeekServices.PeekReader.Consults;
 using PeekReaderService.Models;
 using PeekReaderService.Repository.Contexts;
 using PeekReaderService.Service.Interfaces;
+using Domain = Peek.Framework.PeekServices.Domain;
 
 namespace PeekReaderService.Repository.Repositories
 {
@@ -18,11 +20,17 @@ namespace PeekReaderService.Repository.Repositories
             _commentsContext = new CommentContext(options);
         }
 
-        public async Task<CommentsDocument> Get(GetCommentsRequest getCommentsRequest)
+        public async Task<List<Domain.Comment>> Get(GetCommentsRequest getCommentsRequest)
         {
-            var result = await _commentsContext.Comments.FindAsync(x => x.PeekId == getCommentsRequest.PeekId);
-
-            return result.FirstOrDefault();
+            var result = await _commentsContext.Comments.Find(x => x.PeekId == getCommentsRequest.PeekId)
+                .Limit(getCommentsRequest.PageInformation.PageSize)
+                .ToListAsync();
+            
+            if (result.Any())
+            {
+                return result.FirstOrDefault().Comments.ToList();
+            }
+            return null;
         }
 
         public async Task<int> Get(GetCommentsCountRequest getCommentsCountRequest)

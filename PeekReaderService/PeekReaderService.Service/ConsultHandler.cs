@@ -56,9 +56,9 @@ namespace PeekReaderService.Service
             return response;
         }
 
-        public async Task<ResponseBase<CommentsDocument>> Get(GetCommentsRequest getCommentsRequest)
+        public async Task<ResponseBase<PagedResult<Domain.Comment>>> Get(GetCommentsRequest getCommentsRequest)
         {
-            var response = new ResponseBase<CommentsDocument>(success: false, errors: new List<string>(), data: null);
+            var response = new ResponseBase<PagedResult<Domain.Comment>>(success: false, errors: new List<string>(), data: null);
 
             var result = await _commentsRepository.Get(getCommentsRequest);
 
@@ -66,7 +66,9 @@ namespace PeekReaderService.Service
                 return response;
 
             response.Success = true;
-            response.Data = result;
+            response.Data = new PagedResult<Domain.Comment>();
+            response.Data.Result = result;
+            response.Data.TotalItems = 0;
 
             return response;
         }
