@@ -24,6 +24,7 @@ namespace PeekReaderService.Repository.Repositories
         public async Task<List<Domain.Like>> Get(GetLikesRequest getLikesRequest)
         {
             var result = await _likesContext.Likes.Find(x => x.PeekId == getLikesRequest.PeekId)
+                .Skip(getLikesRequest.PageInformation.Offset)
                 .Limit(getLikesRequest.PageInformation.PageSize)
                 .ToListAsync();
 

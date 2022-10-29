@@ -23,6 +23,7 @@ namespace PeekReaderService.Repository.Repositories
         public async Task<List<Domain.Comment>> Get(GetCommentsRequest getCommentsRequest)
         {
             var result = await _commentsContext.Comments.Find(x => x.PeekId == getCommentsRequest.PeekId)
+                .Skip(getCommentsRequest.PageInformation.Offset)
                 .Limit(getCommentsRequest.PageInformation.PageSize)
                 .ToListAsync();
             

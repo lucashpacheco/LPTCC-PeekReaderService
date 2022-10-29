@@ -25,16 +25,19 @@ namespace PeekReaderService.Repository.Repositories
             List<Domain.Peek> result;
             if (getPeeksRequest.UserId.Count > 1)
                 result = await _peekContext.Peek.Find(x => getPeeksRequest.UserId.Contains(x.AuthorId))
+                    .Skip(getPeeksRequest.PageInformation.Offset)
                     .Limit(getPeeksRequest.PageInformation.PageSize)
                     .SortByDescending(c => c.CreatedDate)
                     .ToListAsync();
             else if (getPeeksRequest.UserId.Count == 1)
                 result = await _peekContext.Peek.Find(x => x.Id == getPeeksRequest.UserId[0])
+                    .Skip(getPeeksRequest.PageInformation.Offset)
                     .Limit(getPeeksRequest.PageInformation.PageSize)
                     .SortByDescending(c => c.CreatedDate)
                     .ToListAsync();
             else
                 result = await _peekContext.Peek.Find(new BsonDocument())
+                    .Skip(getPeeksRequest.PageInformation.Offset)
                     .Limit(getPeeksRequest.PageInformation.PageSize)
                     .SortByDescending(c => c.CreatedDate)
                     .ToListAsync();
