@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: lptccapi.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_1eb036d4dae3445c9322e5af8ce95de5 }}/lptccapi/peekreaderserviceapi:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./PeekReaderService/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
