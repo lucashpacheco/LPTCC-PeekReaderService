@@ -26,7 +26,6 @@ namespace PeekReaderService.API.Controllers
             var result = await _consultHandler.Get(getPeeksRequest);
 
             return CustomResponse(result);
-
         }
 
         [HttpGet("count")]
@@ -35,7 +34,6 @@ namespace PeekReaderService.API.Controllers
             var result = await _consultHandler.Get(getPeeksRequest);
 
             return CustomResponse(result);
-
         }
     }
 }
