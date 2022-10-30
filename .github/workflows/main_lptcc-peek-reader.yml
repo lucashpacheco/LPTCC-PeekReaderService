@@ -23,15 +23,15 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: https://lptccapi.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_6d603e261dbc4ff7a5ddf2ed9501d8dd }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_f80e015e1e8f433da685f1b552083d4f }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_185ea9aaa790479aa309efffb27a4355 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_76c16b2ac41644309df17b080d371a7c }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: lptccapi.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_6d603e261dbc4ff7a5ddf2ed9501d8dd }}/lptccapi/lptccapi/peekreaderserviceapi:${{ github.sha }}
-        file: ./PeekReaderService/Dockerfile
+        tags: lptccapi.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_185ea9aaa790479aa309efffb27a4355 }}/lptccapi/lptccapi/lptccapi/peekreaderserviceapi:${{ github.sha }}
+        file: ./Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'lptcc-peek-reader'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_42fe44febabd4a3bb25faa127a2a6ff0 }}
-        images: 'lptccapi.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_6d603e261dbc4ff7a5ddf2ed9501d8dd }}/lptccapi/lptccapi/peekreaderserviceapi:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_62d79329245e424c99d0b11d94a73770 }}
+        images: 'lptccapi.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_185ea9aaa790479aa309efffb27a4355 }}/lptccapi/lptccapi/lptccapi/peekreaderserviceapi:${{ github.sha }}'
