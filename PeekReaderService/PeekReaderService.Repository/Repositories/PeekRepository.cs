@@ -1,27 +1,35 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
+using MongoDB.Bson.IO;
 using MongoDB.Driver;
 using Peek.Framework.PeekServices.PeekReader.Consults;
 using PeekReaderService.Models;
 using PeekReaderService.Repository.Contexts;
+using PeekReaderService.Service;
 using PeekReaderService.Service.Interfaces;
 using Domain = Peek.Framework.PeekServices.Domain;
-
+using NW = Newtonsoft.Json;
 
 namespace PeekReaderService.Repository.Repositories
 {
     public class PeekRepository : IPeekRepository
     {
         public readonly PeekContext _peekContext;
-        public PeekRepository(IOptions<ConfigDb> options)
+        private readonly ILogger<PeekRepository> _logger;
+
+        public PeekRepository(ILogger<PeekRepository> logger, IOptions<ConfigDb> options)
         {
             _peekContext = new PeekContext(options);
+            _logger = logger;
+
         }
 
         public async Task<List<Domain.Peek>> Get(GetPeeksRequest getPeeksRequest)
         {
+            _logger.Log(LogLevel.Information, $"[ConsultHandler] - GetPeeksRequest received in repository : {NW.JsonConvert.SerializeObject(getPeeksRequest)}");
             List<Domain.Peek> result;
             if (getPeeksRequest.UserId.Count > 1)
                 result = await _peekContext.Peek.Find(x => getPeeksRequest.UserId.Contains(x.AuthorId))

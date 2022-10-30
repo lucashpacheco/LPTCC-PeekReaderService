@@ -6,6 +6,8 @@ using Peek.Framework.PeekServices.PeekReader.Consults;
 using PeekReaderService.Models.Interfaces;
 using PeekReaderService.Service.Interfaces;
 using Domain = Peek.Framework.PeekServices.Domain;
+using Microsoft.Extensions.Logging;
+using NW = Newtonsoft.Json;
 
 
 namespace PeekReaderService.Service
@@ -15,22 +17,31 @@ namespace PeekReaderService.Service
         private readonly ILikesRepository _likesRepository;
         private readonly IPeekRepository _peekRepository;
         private readonly ICommentsRepository _commentsRepository;
+        private readonly ILogger<ConsultHandler> _logger;
 
-        public ConsultHandler(IPeekRepository peekRepository, ICommentsRepository commentsRepository, ILikesRepository likesRepository)
+
+        public ConsultHandler(ILogger<ConsultHandler> logger, IPeekRepository peekRepository, ICommentsRepository commentsRepository, ILikesRepository likesRepository)
         {
             _peekRepository = peekRepository;
             _commentsRepository = commentsRepository;
             _likesRepository = likesRepository;
+            _logger = logger;
         }
 
         public async Task<ResponseBase<PagedResult<Domain.Peek>>> Get(GetPeeksRequest getPeeksRequest)
         {
+            _logger.Log(LogLevel.Information, $"[ConsultHandler] - GetPeeksRequest received in handler : {NW.JsonConvert.SerializeObject(getPeeksRequest)}");
+
             var response = new ResponseBase<PagedResult<Domain.Peek>>(success: false, errors: new List<string>(), data: new PagedResult<Domain.Peek>());
 
             var result = await _peekRepository.Get(getPeeksRequest);
 
             if (result == null)
+            {
+                _logger.Log(LogLevel.Error, $"[ConsultHandler] - Unable to get peeks ");
+
                 return response;
+            }
 
             response.Success = true;
             response.Data.Result = result;

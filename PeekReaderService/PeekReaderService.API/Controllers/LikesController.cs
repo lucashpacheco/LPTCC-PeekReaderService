@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Peek.Framework.Common.Utils;
 using Peek.Framework.PeekServices.PeekReader.Consults;
 using PeekReaderService.Models.Interfaces;
+using NW = Newtonsoft.Json;
 
 namespace PeekReaderService.API.Controllers
 {
@@ -23,6 +24,8 @@ namespace PeekReaderService.API.Controllers
         [HttpGet]
         public async Task<ActionResult> Get([FromQuery] GetLikesRequest getPeeksRequest)
         {
+            _logger.Log(LogLevel.Information, $"[RequestReceived] - GetLikesRequest received in SERVICE controller : {NW.JsonConvert.SerializeObject(getPeeksRequest)}");
+
             var result = await _consultHandler.Get(getPeeksRequest);
 
             return CustomResponse(result);
@@ -31,6 +34,8 @@ namespace PeekReaderService.API.Controllers
         [HttpGet("count")]
         public async Task<ActionResult> Get([FromQuery] GetLikesCountRequest getPeeksRequest)
         {
+            _logger.Log(LogLevel.Information, $"[RequestReceived] - GetLikesCountRequest received in SERVICE controller : {NW.JsonConvert.SerializeObject(getPeeksRequest)}");
+
             var result = await _consultHandler.Get(getPeeksRequest);
 
             return CustomResponse(result);
