@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
@@ -23,7 +24,7 @@ namespace PeekReaderService.Repository.Repositories
 
         public async Task<List<Domain.Like>> Get(GetLikesRequest getLikesRequest)
         {
-            var result = await _likesContext.Likes.Find(x => x.PeekId == getLikesRequest.PeekId)
+            var result = await _likesContext.Likes.Find(x => getLikesRequest.PeeksIds.Contains((Guid)x.PeekId))
                 .Skip(getLikesRequest.PageInformation.Offset)
                 .Limit(getLikesRequest.PageInformation.PageSize)
                 .ToListAsync();
@@ -39,8 +40,7 @@ namespace PeekReaderService.Repository.Repositories
 
         public async Task<int> Get(GetLikesCountRequest getLikesCountRequest)
         {
-            var result = await _likesContext.Likes.Find(x => x.PeekId == getLikesCountRequest.PeekId)
-                //.Limit(getLikesRequest.PageInformation.PageSize)
+            var result = await _likesContext.Likes.Find(x => getLikesCountRequest.PeeksIds.Contains((Guid)x.PeekId))
                 .ToListAsync();
 
             if (result.Any())

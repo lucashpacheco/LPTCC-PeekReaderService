@@ -21,8 +21,8 @@ namespace PeekReaderService.API.Controllers
             _consultHandler = consultHandler;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Get([FromQuery] GetLikesRequest getPeeksRequest)
+        [HttpPost]
+        public async Task<ActionResult> Get([FromBody] GetLikesRequest getPeeksRequest)
         {
             _logger.Log(LogLevel.Information, $"[RequestReceived] - GetLikesRequest received in SERVICE controller : {NW.JsonConvert.SerializeObject(getPeeksRequest)}");
 
