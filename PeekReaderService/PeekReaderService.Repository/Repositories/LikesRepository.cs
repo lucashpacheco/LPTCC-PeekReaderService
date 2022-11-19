@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using Peek.Framework.PeekServices.Documents;
 using Peek.Framework.PeekServices.PeekReader.Consults;
 using PeekReaderService.Models;
+using PeekReaderService.Models.Interfaces;
 using PeekReaderService.Repository.Contexts;
 using PeekReaderService.Service.Interfaces;
 using Domain = Peek.Framework.PeekServices.Domain;
@@ -22,7 +23,7 @@ namespace PeekReaderService.Repository.Repositories
             _likesContext = new LikeContext(options);
         }
 
-        public async Task<List<Domain.Like>> Get(GetLikesRequest getLikesRequest)
+        public async Task<List<LikesDocument>> Get(GetLikesRequest getLikesRequest)
         {
             var result = await _likesContext.Likes.Find(x => getLikesRequest.PeeksIds.Contains((Guid)x.PeekId))
                 .Skip(getLikesRequest.PageInformation.Offset)
@@ -31,7 +32,7 @@ namespace PeekReaderService.Repository.Repositories
 
             if (result.Any())
             {
-                return result.FirstOrDefault().Likes;
+                return result;
 
             }
 

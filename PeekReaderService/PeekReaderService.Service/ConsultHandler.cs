@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Peek.Framework.Common.Responses;
-using Peek.Framework.PeekServices.Documents;
 using Peek.Framework.PeekServices.PeekReader.Consults;
+using Peek.Framework.PeekServices.PeekReader.Responses;
 using PeekReaderService.Models.Interfaces;
 using PeekReaderService.Service.Interfaces;
 using Domain = Peek.Framework.PeekServices.Domain;
-using Microsoft.Extensions.Logging;
 using NW = Newtonsoft.Json;
-
 
 namespace PeekReaderService.Service
 {
@@ -50,9 +49,9 @@ namespace PeekReaderService.Service
             return response;
         }
 
-        public async Task<ResponseBase<PagedResult<Domain.Like>>> Get(GetLikesRequest getLikesRequest)
+        public async Task<ResponseBase<PagedResult<LikesResponse>>> Get(GetLikesRequest getLikesRequest)
         {
-            var response = new ResponseBase<PagedResult<Domain.Like>>(success: false, errors: new List<string>(), data: null);
+            var response = new ResponseBase<PagedResult<LikesResponse>>(success: false, errors: new List<string>(), data: null);
 
             var result = await _likesRepository.Get(getLikesRequest);
 
@@ -60,8 +59,11 @@ namespace PeekReaderService.Service
                 return response;
 
             response.Success = true;
-            response.Data = new PagedResult<Domain.Like>();
-            response.Data.Result = result;
+            response.Data = new PagedResult<LikesResponse>();
+
+            response.Data.Result = new List<LikesResponse>();
+            result.ForEach(x => response.Data.Result.Add(new LikesResponse(x)));
+
             response.Data.TotalItems = 0;
 
             return response;
